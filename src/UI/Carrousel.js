@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import SvgArrow from './SvgArrow';
+import SvgStars from './SvgStars';
 
 const CarrouselStyle = styled.div`
   display: flex;
@@ -32,14 +33,34 @@ const CarrouselStyle = styled.div`
 
     & .movie-info {
       display: flex;
+      flex-direction: column;
       position: absolute;
       width: 100%;
       height: 100%;
       top: 0;
       left: 0;
       padding: 2rem;
-      align-items: flex-end;
+      justify-content: flex-end;
 
+      & .counter {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        justify-content: flex-end;
+        h2 {
+          font-weight: 200;
+          letter-spacing: 0.2rem;
+        }
+      }
+      & .rating {
+        display: flex;
+        align-items: center;
+        span {
+          font-size: 1.2rem;
+          padding-top: 2px;
+          font-weight: bold;
+        }
+      }
       h1 {
         font-size: 2.5rem;
       }
@@ -95,6 +116,8 @@ function Carrousel() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [count, movies]);
 
+  console.log(movies);
+
   return (
     <CarrouselStyle counter={count}>
       <div onClick={handleRight} className="arrow right">
@@ -104,10 +127,17 @@ function Carrousel() {
         <SvgArrow direction="left" />
       </div>
       <div className="wrapper">
-        {movies.map(movie => (
+        {movies.map((movie, i) => (
           <div key={movie.id} className="movie-item">
             <div className="movie-info">
+              <div className="counter">
+                <h2>{`${String(i + 1).padStart(2, '0')}/${movies.length}`}</h2>
+              </div>
               <h1>{movie.title}</h1>
+              <div className="rating">
+                <span>{movie.vote_average}</span>
+                <SvgStars id={movie.id} rating={movie.vote_average} />
+              </div>
             </div>
             <img src={`${url}${movie.backdrop_path}`} alt={movie.title} />
           </div>
