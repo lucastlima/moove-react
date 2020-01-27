@@ -45,7 +45,7 @@ html {
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Martel Sans', sans-serif;
     font-weight: 400;
     line-height: 1.6;
     color: white;    
@@ -64,5 +64,16 @@ a, input, textarea, button {
 li {
     list-style: none;
     color: inherit;
+}
+
+#root {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+}
+
+*::-webkit-scrollbar {
+    display: none;
 }
 `;

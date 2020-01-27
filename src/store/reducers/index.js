@@ -1,11 +1,15 @@
 import { combineReducers } from 'redux';
 
 import testReducer from './testReducer';
-import movieDB from './movieDB.reducer';
+import moviesReducer from './movies.reducer';
+import localReducer from './local.reducer';
+import discoverReducer from './discover.reducer';
 
 const rootReducer = combineReducers({
   test: testReducer,
-  movieDB
+  movies: moviesReducer,
+  discover: discoverReducer,
+  local: localReducer
 });
 
 export default rootReducer;

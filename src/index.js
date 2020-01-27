@@ -6,13 +6,19 @@ import store from './store';
 import App from './App';
 import theme from './utils/theme';
 import GlobalStyle from './utils/global';
+import { Router } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 import * as serviceWorker from './serviceWorker';
+
+export const history = createBrowserHistory();
 
 ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <App />
+      <Router history={history}>
+        <GlobalStyle />
+        <App />
+      </Router>
     </ThemeProvider>
   </Provider>,
   document.getElementById('root')
