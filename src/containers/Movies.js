@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import MovieItem from '../components/MovieItem';
+import React from "react";
+import styled from "styled-components";
+import { useSelector } from "react-redux";
+import MovieItem from "../components/MovieItem";
 
 const StyledMovies = styled.div`
   display: flex;
@@ -15,6 +15,10 @@ const StyledMovies = styled.div`
     width: 100%;
     overflow-y: auto;
     height: min-content;
+
+    & > *:not(:last-child) {
+      margin-right: 1rem;
+    }
   }
 
   .section-nav {
@@ -37,7 +41,7 @@ function Movies() {
       </div>
       <div className="movies-wrapper">
         {movies.trending.map(movie => (
-          <MovieItem movie={movie} />
+          <MovieItem flex key={movie.id} movie={movie} />
         ))}
       </div>
     </StyledMovies>

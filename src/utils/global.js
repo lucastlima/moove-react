@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
 :root {
@@ -17,8 +17,7 @@ export default createGlobalStyle`
 
 html {
     font-size: 62.5%;
-    box-sizing: border-box;
-       
+    box-sizing: border-box;    
     @media ${props => props.theme.mediaQueries.smallest} {
         font-size: 55%;        
     }
@@ -48,7 +47,7 @@ body {
     font-family: 'Martel Sans', sans-serif;
     font-weight: 400;
     line-height: 1.6;
-    color: white;    
+    color: white;   
 }
 
 html, body, #root {
@@ -76,4 +75,5 @@ li {
 *::-webkit-scrollbar {
     display: none;
 }
+
 `;

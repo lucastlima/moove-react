@@ -1,25 +1,24 @@
-import React from 'react';
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
+import Poster from "./Poster";
 
 const MovieItemStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
   border-radius: 0.5rem;
   box-shadow: var(--shadowOne);
+  padding: 0.5rem 0.5rem 0.2rem;
+  background: rgba(255, 255, 255, 0.04);
   transition: all 0.3s ease-in;
-  margin: 1rem;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.04);
-  }
-
-  &:hover > .movie-info {
-    min-height: 5rem;
-  }
 
   & .movie-info {
     display: flex;
     padding: 0.5rem;
     min-height: 2rem;
+
     justify-content: center;
     transition: all 0.3s ease-in;
 
@@ -32,12 +31,7 @@ const MovieItemStyled = styled.div`
 
   & .movie-img {
     display: flex;
-    & img {
-      width: 100%;
-      max-width: 300px;
-      min-width: 180px;
-      height: 100%;
-    }
+    width: ${props => (props.flex ? "18rem" : null)};
   }
 `;
 
@@ -45,19 +39,15 @@ const StyledNavLink = styled(NavLink)`
   color: inherit;
 `;
 
-function MovieItem({ movie }) {
-  const imgPath = 'https://image.tmdb.org/t/p/w500';
-
+function MovieItem({ movie, flex }) {
   return (
     <StyledNavLink
       key={movie.id}
       to={`/movie/${movie.id}`}
       location={{ key: movie.id }}
     >
-      <MovieItemStyled>
-        <div className="movie-img">
-          <img src={imgPath + movie.poster_path} alt={movie.title} />
-        </div>
+      <MovieItemStyled flex={flex}>
+        <Poster src={movie.poster_path} size="w500" alt={movie.title} />
         <div className="movie-info">
           <h4>{movie.title}</h4>
         </div>

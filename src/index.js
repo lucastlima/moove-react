@@ -1,16 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { ThemeProvider } from 'styled-components';
-import { Provider } from 'react-redux';
-import store from './store';
-import App from './App';
-import theme from './utils/theme';
-import GlobalStyle from './utils/global';
-import { Router } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
-import * as serviceWorker from './serviceWorker';
-
-export const history = createBrowserHistory();
+import React from "react";
+import ReactDOM from "react-dom";
+import { ThemeProvider } from "styled-components";
+import { Provider } from "react-redux";
+import store from "./store";
+import App from "./App";
+import theme from "./utils/theme";
+import GlobalStyle from "./utils/global";
+import { Router } from "react-router-dom";
+import * as serviceWorker from "./serviceWorker";
+import history from "./utils/history";
 
 ReactDOM.render(
   <Provider store={store}>
@@ -21,7 +19,7 @@ ReactDOM.render(
       </Router>
     </ThemeProvider>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

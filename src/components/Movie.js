@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import SvgArrow from './SvgArrow';
-import { history } from '../index';
+import React from "react";
+import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import SvgArrow from "./SvgArrow";
+import history from "../utils/history";
 
 const MovieStyled = styled.div`
   display: flex;
@@ -50,7 +50,7 @@ function Movie() {
 
   const data = movie || Dmovie;
 
-  const url = 'https://image.tmdb.org/t/p/original';
+  const url = "https://image.tmdb.org/t/p/original";
 
   const handleGoBack = () => {
     history.goBack();
