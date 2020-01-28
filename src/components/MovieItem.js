@@ -39,15 +39,20 @@ const StyledNavLink = styled(NavLink)`
   color: inherit;
 `;
 
-function MovieItem({ movie, flex }) {
+function MovieItem({ movie, min }) {
   return (
     <StyledNavLink
       key={movie.id}
       to={`/movie/${movie.id}`}
       location={{ key: movie.id }}
     >
-      <MovieItemStyled flex={flex}>
-        <Poster src={movie.poster_path} size="w500" alt={movie.title} />
+      <MovieItemStyled>
+        <Poster
+          min={min}
+          src={movie.poster_path}
+          size="w500"
+          alt={movie.title}
+        />
         <div className="movie-info">
           <h4>{movie.title}</h4>
         </div>

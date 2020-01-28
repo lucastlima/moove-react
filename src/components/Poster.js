@@ -1,43 +1,46 @@
 import React, { useState } from "react";
-import Loader from "./Loader";
 import styled from "styled-components";
+import Loader from "./Loader";
 
-const Image = styled.img`
-  visibility: ${p => (p.loading ? "hidden" : "visible")};
-  opacity: ${p => (p.loading ? 0 : 1)};
-  transition: all 1s ease-in;
-  width: 100%;
-  height: auto;
-`;
-
-const ImageWrapper = styled.div`
+const ImageStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-width: ${p => (p.min ? `${p.min}rem` : null)};
   width: 100%;
   height: 100%;
+  overflow: hidden;
+
+  & .preload-img {
+    display: ${p => (p.loading ? "none" : "block")};
+    width: 100%;
+    height: auto;
+    animation: fadeIn 0.3s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `;
 
-function Poster({ src, size, alt }) {
-  const [source, setSource] = useState(src);
+function Poster({ src, size, alt, min }) {
   const [loading, setLoading] = useState(1);
-
-  const handleLoad = e => {
-    setLoading(0);
-  };
-
-  const handleError = e => {
-    setSource("");
-  };
+  const handleLoad = () => setLoading(0);
 
   return (
-    <ImageWrapper>
-      {loading ? <Loader loading={loading} /> : null}
-      <Image
-        loading={loading}
+    <ImageStyled min={min} loading={loading}>
+      <Loader loading={loading} />
+      <img
         onLoad={handleLoad}
-        onError={handleError}
-        src={`https://image.tmdb.org/t/p/${size}${source}`}
+        className="preload-img"
+        src={`https://image.tmdb.org/t/p/${size}${src}`}
         alt={alt}
       />
-    </ImageWrapper>
+    </ImageStyled>
   );
 }
 

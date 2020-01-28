@@ -41,7 +41,7 @@ function Movies() {
       </div>
       <div className="movies-wrapper">
         {movies.trending.map(movie => (
-          <MovieItem flex key={movie.id} movie={movie} />
+          <MovieItem min={18} key={movie.id} movie={movie} />
         ))}
       </div>
     </StyledMovies>
