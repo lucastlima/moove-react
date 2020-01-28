@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import SvgArrow from "./SvgArrow";
+import Poster from "./Poster";
 import history from "../utils/history";
 
 const MovieStyled = styled.div`
@@ -28,6 +29,15 @@ const MovieStyled = styled.div`
     flex-direction: column;
     flex: 1;
     justify-content: space-around;
+    padding: 0 6rem;
+
+    .content {
+      display: flex;
+    }
+
+    .image-wrapper {
+      width: 30rem;
+    }
   }
 
   .m-title {
@@ -64,7 +74,14 @@ function Movie() {
         </div>
       </div>
       <div className="info">
-        <h1 className="m-title">{data.title}</h1>
+        <div className="content">
+          <div className="image-wrapper">
+            <Poster src={data.poster_path} size="w500" alt={data.title} />
+          </div>
+          <div className="description">
+            <h1 className="m-title">{data.title}</h1>
+          </div>
+        </div>
         <p>{data.overview}</p>
       </div>
     </MovieStyled>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Loader from "./Loader";
+import placeholder from "../images/placeholder.svg";
 
 const ImageStyled = styled.div`
   display: flex;
@@ -30,12 +31,17 @@ const ImageStyled = styled.div`
 function Poster({ src, size, alt, min }) {
   const [loading, setLoading] = useState(1);
   const handleLoad = () => setLoading(0);
+  const handleError = e => {
+    e.target.src = placeholder;
+    setLoading(0);
+  };
 
   return (
     <ImageStyled min={min} loading={loading}>
       <Loader loading={loading} />
       <img
         onLoad={handleLoad}
+        onError={handleError}
         className="preload-img"
         src={`https://image.tmdb.org/t/p/${size}${src}`}
         alt={alt}
@@ -47,7 +53,8 @@ function Poster({ src, size, alt, min }) {
 Poster.defaultProps = {
   size: "w500",
   src: "",
-  alt: "image"
+  alt: "image",
+  min: null
 };
 
 export default Poster;

@@ -6,6 +6,7 @@ import MovieItem from "../components/MovieItem";
 const DiscoverStyled = styled.div`
   display: flex;
   flex: 1;
+  height: 100%;
   flex-direction: column;
   padding: 1rem;
 
@@ -20,6 +21,7 @@ const DiscoverStyled = styled.div`
     grid-gap: 1rem;
     grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
     padding-bottom: 2rem;
+    height: 100%;
   }
 `;
 

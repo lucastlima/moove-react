@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 750">
+  <defs>
+    <style>
+      .a {
+        opacity: 0.4;
+        isolation: isolate;
+      }
+
+      .b {
+        fill: #fff;
+        opacity: 0.3;
+      }
+    </style>
+  </defs>
+  <title>placeholder</title>
+  <rect class="a" width="500" height="750"/>
+  <path class="b" d="M250,207A168,168,0,1,0,418,375,168,168,0,0,0,250,207Zm0,46.25a121.16,121.16,0,0,1,68.17,20.86L149.11,443.17A121.77,121.77,0,0,1,250,253.25Zm0,243.5a121.16,121.16,0,0,1-68.17-20.86L350.89,306.83A121.77,121.77,0,0,1,250,496.75Z"/>
+</svg>
