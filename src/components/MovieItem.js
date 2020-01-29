@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
-import Poster from './Poster';
-import moment from 'moment';
-import SvgRating from './SvgRating';
+import React from "react";
+import styled from "styled-components";
+
+import Poster from "./Poster";
+import moment from "moment";
+import SvgRating from "./SvgRating";
 
 const MovieItemStyled = styled.div`
   display: flex;
@@ -50,33 +50,18 @@ const MovieItemStyled = styled.div`
   }
 `;
 
-const StyledNavLink = styled(NavLink)`
-  color: inherit;
-`;
-
 function MovieItem({ movie, min }) {
   return (
-    <StyledNavLink
-      key={movie.id}
-      to={`/movie/${movie.id}`}
-      location={{ key: movie.id }}
-    >
-      <MovieItemStyled>
-        <Poster
-          min={min}
-          src={movie.poster_path}
-          size="w500"
-          alt={movie.title}
-        />
-        <div className="overlay-info">
-          <h3>{movie.title || movie.name}</h3>
-          <h4>{moment(movie.release_date).year()}</h4>
-        </div>
-        <div className="raing">
-          <SvgRating rating={movie.vote_average} />
-        </div>
-      </MovieItemStyled>
-    </StyledNavLink>
+    <MovieItemStyled>
+      <Poster min={min} src={movie.poster_path} size="w500" alt={movie.title} />
+      <div className="overlay-info">
+        <h3>{movie.title || movie.name}</h3>
+        <h4>{moment(movie.release_date).year()}</h4>
+      </div>
+      <div className="raing">
+        <SvgRating rating={movie.vote_average} />
+      </div>
+    </MovieItemStyled>
   );
 }
 

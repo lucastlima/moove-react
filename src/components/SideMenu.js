@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 const SideMenuStyle = styled.div`
   display: flex;
@@ -53,8 +53,8 @@ function SideMenu() {
       </div>
       <nav>
         <ul>
-          <StyledNavLink to="/trending">Trending</StyledNavLink>
           <StyledNavLink to="/discover">Discover</StyledNavLink>
+          <StyledNavLink to="/trending">Trending</StyledNavLink>
           <StyledNavLink to="/movies">Movies</StyledNavLink>
           <StyledNavLink to="/tvshows">TV Shows</StyledNavLink>
           <StyledNavLink to="/people">People</StyledNavLink>

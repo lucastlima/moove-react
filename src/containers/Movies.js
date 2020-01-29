@@ -3,48 +3,41 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import MovieItem from "../components/MovieItem";
 
-const StyledMovies = styled.div`
+const MoviesStyled = styled.div`
   display: flex;
+  flex: 1;
+  height: 100%;
   flex-direction: column;
-  width: 100%;
   padding: 1rem;
-  overflow: hidden;
 
-  .movies-wrapper {
+  .navigation {
     display: flex;
     width: 100%;
-    overflow-y: auto;
-    height: min-content;
-
-    & > *:not(:last-child) {
-      margin-right: 1rem;
-    }
+    height: 4rem;
   }
 
-  .section-nav {
-    display: flex;
-    width: 100%;
-    height: 3rem;
-    align-items: center;
-    padding: 0 1rem;
-    font-size: 1.4rem;
+  .view {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    padding-bottom: 2rem;
   }
 `;
 
 function Movies() {
-  const movies = useSelector(state => state.movies);
+  const movies = useSelector(state => state.movies.movies);
+
+  // discover.movies.forEach(el => console.log(el));
 
   return (
-    <StyledMovies>
-      <div className="section-nav">
-        <h4>TRENDING</h4>
-      </div>
-      <div className="movies-wrapper">
-        {movies.trending.map(movie => (
-          <MovieItem min={18} key={movie.id} movie={movie} />
+    <MoviesStyled>
+      <div className="navigation">Search</div>
+      <div className="view">
+        {movies.map(movie => (
+          <MovieItem key={movie.id} movie={movie} />
         ))}
       </div>
-    </StyledMovies>
+    </MoviesStyled>
   );
 }
 

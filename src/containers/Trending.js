@@ -1,8 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { useRouteMatch } from 'react-router-dom';
-import MovieItem from '../components/MovieItem';
+import React from "react";
+import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import MovieItem from "../components/MovieItem";
+import { StyledNavLink } from "../components/styledComponents";
 
 const TrendingStyled = styled.div`
   display: flex;
@@ -26,17 +27,20 @@ const TrendingStyled = styled.div`
 `;
 
 function Trending() {
-  const trending = useSelector(state => state.trending);
-  // trending.movies.forEach(el => console.log(el));
-  const test = useRouteMatch();
-  console.log(test);
+  const trending = useSelector(state => state.trending.trending);
+  const { pathname } = useLocation();
 
   return (
     <TrendingStyled>
       <div className="navigation">Search</div>
       <div className="view">
-        {trending.trending.map(movie => (
-          <MovieItem key={movie.id} movie={movie} />
+        {trending.map(movie => (
+          <StyledNavLink
+            key={movie.id}
+            to={{ pathname: `${pathname}/${movie.id}`, data: movie }}
+          >
+            <MovieItem key={movie.id} movie={movie} />
+          </StyledNavLink>
         ))}
       </div>
     </TrendingStyled>

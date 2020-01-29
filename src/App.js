@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { init } from './store/actions';
-import Layout from './components/Layout';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import Movies from './containers/Movies';
-import Movie from './components/Movie';
-import Discover from './containers/Discover';
-import Trending from './containers/Trending';
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { init } from "./store/actions";
+import Layout from "./components/Layout";
+import { Switch, Route, Redirect } from "react-router-dom";
+import Movies from "./containers/Movies";
+import Movie from "./components/Movie";
+import Discover from "./containers/Discover";
+import Trending from "./containers/Trending";
 
 // import * as Vibrant from 'node-vibrant';
 
