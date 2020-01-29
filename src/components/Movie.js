@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import SvgArrow from "./SvgArrow";
-import Poster from "./Poster";
-import history from "../utils/history";
+import React from 'react';
+import styled from 'styled-components';
+import { useParams, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import SvgArrow from './SvgArrow';
+import Poster from './Poster';
+import history from '../utils/history';
 
 const MovieStyled = styled.div`
   display: flex;
@@ -55,12 +55,15 @@ function Movie() {
   const movies = useSelector(({ movies }) => movies);
   const Dmovies = useSelector(({ discover }) => discover.movies);
   const { id } = useParams();
+  const location = useLocation();
+  console.log(location);
+
   const movie = movies.trending.find(m => m.id === +id);
   const Dmovie = Dmovies.find(m => m.id === +id);
 
   const data = movie || Dmovie;
 
-  const url = "https://image.tmdb.org/t/p/original";
+  const url = 'https://image.tmdb.org/t/p/original';
 
   const handleGoBack = () => {
     history.goBack();

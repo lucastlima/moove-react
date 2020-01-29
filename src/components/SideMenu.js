@@ -53,6 +53,7 @@ function SideMenu() {
       </div>
       <nav>
         <ul>
+          <StyledNavLink to="/trending">Trending</StyledNavLink>
           <StyledNavLink to="/discover">Discover</StyledNavLink>
           <StyledNavLink to="/movies">Movies</StyledNavLink>
           <StyledNavLink to="/tvshows">TV Shows</StyledNavLink>

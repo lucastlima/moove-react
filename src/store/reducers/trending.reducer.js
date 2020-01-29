@@ -1,11 +1,11 @@
 export const SET_LOADING = 'SET_LOADING';
-export const FETCH_MOVIES_SUCCESS = 'FETCH_MOVIES_SUCCESS';
-export const FETCH_MOVIES_ERROR = 'FETCH_MOVIES_ERROR';
+export const FETCH_TRENDING_SUCCESS = 'FETCH_TRENDING_SUCCESS';
+export const FETCH_TRENDING_ERROR = 'FETCH_TRENDING_ERROR';
 
 const initialState = {
   loading: true,
   error: null,
-  movies: []
+  trending: []
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -15,13 +15,13 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         loading: true
       };
-    case FETCH_MOVIES_SUCCESS:
+    case FETCH_TRENDING_SUCCESS:
       return {
         ...state,
         loading: false,
-        movies: payload
+        trending: payload
       };
-    case FETCH_MOVIES_ERROR:
+    case FETCH_TRENDING_ERROR:
       return {
         ...state,
         loading: false,

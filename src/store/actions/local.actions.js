@@ -1,8 +1,7 @@
 import moment from 'moment';
 import { SET_TIMESTAMP } from '../reducers/local.reducer';
 
-import { fetchTrending } from './movies.actions';
-import { fetchDiscoverMovies } from './discover.actions';
+import { fetchMovies, fetchDiscoverMovies, fetchTrending } from './index';
 
 export const init = () => async (dispatch, getState) => {
   const { local } = getState();
@@ -13,6 +12,7 @@ export const init = () => async (dispatch, getState) => {
 
   if (check) {
     await dispatch(fetchTrending());
+    await dispatch(fetchMovies());
     await dispatch(fetchDiscoverMovies());
   }
 

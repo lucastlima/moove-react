@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import { useRouteMatch } from 'react-router-dom';
 import MovieItem from '../components/MovieItem';
 
-const DiscoverStyled = styled.div`
+const TrendingStyled = styled.div`
   display: flex;
   flex: 1;
   height: 100%;
@@ -24,21 +25,22 @@ const DiscoverStyled = styled.div`
   }
 `;
 
-function Discover() {
-  const discover = useSelector(state => state.discover);
-
-  // discover.movies.forEach(el => console.log(el));
+function Trending() {
+  const trending = useSelector(state => state.trending);
+  // trending.movies.forEach(el => console.log(el));
+  const test = useRouteMatch();
+  console.log(test);
 
   return (
-    <DiscoverStyled>
+    <TrendingStyled>
       <div className="navigation">Search</div>
       <div className="view">
-        {discover.movies.map(movie => (
+        {trending.trending.map(movie => (
           <MovieItem key={movie.id} movie={movie} />
         ))}
       </div>
-    </DiscoverStyled>
+    </TrendingStyled>
   );
 }
 
-export default Discover;
+export default Trending;
