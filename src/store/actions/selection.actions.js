@@ -12,7 +12,6 @@ export const fetchSelected = s => async (dispatch, getState) => {
     const { selection } = getState();
     const { prevSelections, selected } = selection;
     const prev = prevSelections.find(e => e.id === selected.id);
-    console.log("this: ", s);
 
     if (prev) {
       dispatch({

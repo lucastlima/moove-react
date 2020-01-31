@@ -1,7 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import MovieItem from '../components/MovieItem';
+import React, { useEffect } from "react";
+import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+import MediaItem from "../components/MediaItem";
+import { init } from "../store/actions";
 
 const DiscoverStyled = styled.div`
   display: flex;
@@ -25,7 +26,13 @@ const DiscoverStyled = styled.div`
 `;
 
 function Discover() {
+  const dispatch = useDispatch();
+
   const discover = useSelector(state => state.discover);
+
+  useEffect(() => {
+    dispatch(init("discover"));
+  }, [dispatch]);
 
   // discover.movies.forEach(el => console.log(el));
 
@@ -34,7 +41,7 @@ function Discover() {
       <div className="navigation">Search</div>
       <div className="view">
         {discover.movies.map(movie => (
-          <MovieItem key={movie.id} movie={movie} />
+          <MediaItem mediaType="movie" key={movie.id} media={movie} />
         ))}
       </div>
     </DiscoverStyled>

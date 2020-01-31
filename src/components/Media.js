@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { setSelected, fetchSelected } from "../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import SvgArrow from "./SvgArrow";
 import Poster from "./Poster";
 import history from "../utils/history";
 import Loader from "./Loader";
-import { StyledNavLink } from "../components/styledComponents";
+import { StyledNavLink } from "./styledComponents";
 
-const MovieStyled = styled.div`
+const MediaStyled = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
@@ -22,6 +22,7 @@ const MovieStyled = styled.div`
     ${({ bg }) => `url(${bg})`};
   background-size: cover;
   background-position: center;
+  animation: fadeIn 0.5s ease-in;
 
   .arrow-wrapper {
     position: absolute;
@@ -95,15 +96,15 @@ const MovieStyled = styled.div`
   }
 `;
 
-function Movie() {
+function Media() {
   const selected = useSelector(s => s.selection.selected);
   const loading = useSelector(s => s.selection.loading);
   const dispatch = useDispatch();
   const location = useLocation();
+  const { id } = useParams();
   const { data } = location;
 
   useEffect(() => {
-    console.log(data);
     if (data) {
       dispatch(setSelected(data));
       dispatch(fetchSelected(data));
@@ -116,10 +117,14 @@ function Movie() {
     history.goBack();
   };
 
+  console.log("Render Media", id);
+
+  console.log(location.data);
+
   return loading ? (
     <Loader />
   ) : (
-    <MovieStyled bg={url + selected.backdrop_path}>
+    <MediaStyled bg={url + selected.backdrop_path}>
       <div className="nav">
         <div onClick={handleGoBack} className="arrow-wrapper">
           <SvgArrow size={2} opacity={0.8} direction="left" />
@@ -152,8 +157,8 @@ function Movie() {
           </div>
         </div>
       </div>
-    </MovieStyled>
+    </MediaStyled>
   );
 }
 
-export default Movie;
+export default Media;

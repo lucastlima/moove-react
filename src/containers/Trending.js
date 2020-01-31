@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
-import MovieItem from "../components/MovieItem";
-import { StyledNavLink } from "../components/styledComponents";
+import { useSelector, useDispatch } from "react-redux";
+import MediaItem from "../components/MediaItem";
+import { init } from "../store/actions";
 
 const TrendingStyled = styled.div`
   display: flex;
@@ -27,20 +26,19 @@ const TrendingStyled = styled.div`
 `;
 
 function Trending() {
+  const dispatch = useDispatch();
   const trending = useSelector(state => state.trending.trending);
-  const { pathname } = useLocation();
+
+  useEffect(() => {
+    dispatch(init("trending"));
+  }, [dispatch]);
 
   return (
     <TrendingStyled>
       <div className="navigation">Search</div>
       <div className="view">
         {trending.map(movie => (
-          <StyledNavLink
-            key={movie.id}
-            to={{ pathname: `${pathname}/${movie.id}`, data: movie }}
-          >
-            <MovieItem key={movie.id} movie={movie} />
-          </StyledNavLink>
+          <MediaItem key={movie.id} media={movie} />
         ))}
       </div>
     </TrendingStyled>

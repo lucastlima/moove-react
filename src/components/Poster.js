@@ -17,15 +17,6 @@ const ImageStyled = styled.div`
     height: auto;
     animation: fadeIn 0.3s ease-in;
   }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
 `;
 
 function Poster({ src, size, alt, min }) {

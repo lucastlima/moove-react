@@ -1,20 +1,40 @@
 import moment from "moment";
 import { SET_TIMESTAMP } from "../reducers/local.reducer";
 
-import { fetchMovies, fetchDiscoverMovies, fetchTrending } from "./index";
+import {
+  fetchMovies,
+  fetchDiscoverMovies,
+  fetchTrending,
+  fetchTvShows
+} from "./index";
 
-export const init = () => async (dispatch, getState) => {
-  const { local } = getState();
+export const init = mediaType => async (dispatch, getState) => {
+  // const { local } = getState();
 
-  console.log("Current timestamp: ", local.timestamp);
-  console.log("Timestamp expired: ", local.timestamp < moment().valueOf());
-  const check = moment().valueOf() > local.timestamp;
+  // console.log("Current timestamp: ", local.timestamp);
+  // console.log("Timestamp expired: ", local.timestamp < moment().valueOf());
+  //const check = moment().valueOf() > local.timestamp;
 
-  if (check) {
-    await dispatch(fetchTrending());
-    await dispatch(fetchMovies());
-    await dispatch(fetchDiscoverMovies());
-  }
+  const getData = async () => {
+    switch (mediaType) {
+      case "movies":
+        await dispatch(fetchMovies());
+        break;
+      case "trending":
+        await dispatch(fetchTrending());
+        break;
+      case "discover":
+        await dispatch(fetchDiscoverMovies());
+        break;
+      case "tvshows":
+        await dispatch(fetchTvShows());
+        break;
+      default:
+        return console.log("Init func criteria not match.");
+    }
+  };
+
+  await getData();
 
   dispatch(setTimeStamp());
   dispatch(setLocal());

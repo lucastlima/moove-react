@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-
 import Poster from "./Poster";
 import moment from "moment";
 import SvgRating from "./SvgRating";
+import { StyledNavLink } from "./styledComponents";
 
-const MovieItemStyled = styled.div`
+const MediaItemStyled = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
@@ -50,19 +50,27 @@ const MovieItemStyled = styled.div`
   }
 `;
 
-function MovieItem({ movie, min }) {
+function MediaItem({ media, mediaType }) {
   return (
-    <MovieItemStyled>
-      <Poster min={min} src={movie.poster_path} size="w500" alt={movie.title} />
-      <div className="overlay-info">
-        <h3>{movie.title || movie.name}</h3>
-        <h4>{moment(movie.release_date).year()}</h4>
-      </div>
-      <div className="raing">
-        <SvgRating rating={movie.vote_average} />
-      </div>
-    </MovieItemStyled>
+    <StyledNavLink
+      key={media.id}
+      to={{
+        pathname: `/${mediaType ? mediaType : media.media_type}/${media.id}`,
+        data: mediaType ? { ...media, media_type: mediaType } : media
+      }}
+    >
+      <MediaItemStyled>
+        <Poster src={media.poster_path} size="w500" alt={media.title} />
+        <div className="overlay-info">
+          <h3>{media.title || media.name}</h3>
+          <h4>{moment(media.release_date).year()}</h4>
+        </div>
+        <div className="raing">
+          <SvgRating rating={media.vote_average} />
+        </div>
+      </MediaItemStyled>
+    </StyledNavLink>
   );
 }
 
-export default MovieItem;
+export default MediaItem;

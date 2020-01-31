@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import MediaItem from "../components/MediaItem";
 import { init } from "../store/actions";
 
-const MoviesStyled = styled.div`
+const TvShowsStyled = styled.div`
   display: flex;
   flex: 1;
   height: 100%;
@@ -21,30 +21,29 @@ const MoviesStyled = styled.div`
     display: grid;
     grid-gap: 1rem;
     grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
-    padding-bottom: 6rem;
+    padding-bottom: 2rem;
   }
 `;
 
-function Movies() {
+function TvShows() {
   const dispatch = useDispatch();
-  const movies = useSelector(state => state.movies.movies);
+  const tvshows = useSelector(state => state.tvshows.tvshows);
 
   useEffect(() => {
-    dispatch(init("movies"));
+    dispatch(init("tvshows"));
   }, [dispatch]);
-
   // discover.movies.forEach(el => console.log(el));
 
   return (
-    <MoviesStyled>
+    <TvShowsStyled>
       <div className="navigation">Search</div>
       <div className="view">
-        {movies.map(movie => (
-          <MediaItem key={movie.id} mediaType="movies" media={movie} />
+        {tvshows.map(tvshow => (
+          <MediaItem key={tvshow.id} mediaType="tv" media={tvshow} />
         ))}
       </div>
-    </MoviesStyled>
+    </TvShowsStyled>
   );
 }
 
-export default Movies;
+export default TvShows;
