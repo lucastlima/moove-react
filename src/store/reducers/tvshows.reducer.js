@@ -1,6 +1,6 @@
-export const SET_LOADING = "SET_LOADING";
-export const FETCH_TVSHOWS_SUCCESS = "FETCH_TVSHOWS_SUCCESS";
-export const FETCH_TVSHOWS_ERROR = "FETCH_TVSHOWS_ERROR";
+export const SET_LOADING = 'SET_LOADING';
+export const FETCH_TVSHOWS_SUCCESS = 'FETCH_TVSHOWS_SUCCESS';
+export const FETCH_TVSHOWS_ERROR = 'FETCH_TVSHOWS_ERROR';
 
 const initialState = {
   loading: true,
@@ -16,8 +16,6 @@ export default (state = initialState, { type, payload }) => {
         loading: true
       };
     case FETCH_TVSHOWS_SUCCESS:
-      console.log("fetchTVShows");
-
       return {
         ...state,
         loading: false,

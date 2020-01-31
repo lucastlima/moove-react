@@ -1,12 +1,12 @@
-import moment from "moment";
-import { SET_TIMESTAMP } from "../reducers/local.reducer";
+import moment from 'moment';
+import { SET_TIMESTAMP, SET_PREV_PATH } from '../reducers/local.reducer';
 
 import {
   fetchMovies,
   fetchDiscoverMovies,
   fetchTrending,
   fetchTvShows
-} from "./index";
+} from './index';
 
 export const init = mediaType => async (dispatch, getState) => {
   // const { local } = getState();
@@ -17,20 +17,20 @@ export const init = mediaType => async (dispatch, getState) => {
 
   const getData = async () => {
     switch (mediaType) {
-      case "movies":
+      case 'movies':
         await dispatch(fetchMovies());
         break;
-      case "trending":
+      case 'trending':
         await dispatch(fetchTrending());
         break;
-      case "discover":
+      case 'discover':
         await dispatch(fetchDiscoverMovies());
         break;
-      case "tvshows":
+      case 'tvshows':
         await dispatch(fetchTvShows());
         break;
       default:
-        return console.log("Init func criteria not match.");
+        return console.log('Init func criteria not match.');
     }
   };
 
@@ -43,10 +43,15 @@ export const init = mediaType => async (dispatch, getState) => {
 export const setTimeStamp = () => ({
   type: SET_TIMESTAMP,
   payload: moment()
-    .add(3, "m")
+    .add(3, 'm')
     .valueOf()
 });
 
+export const setPrevPath = path => ({
+  type: SET_PREV_PATH,
+  payload: path
+});
+
 export const setLocal = () => (dispatch, getState) => {
-  localStorage.setItem("moove", JSON.stringify(getState()));
+  localStorage.setItem('moove', JSON.stringify(getState()));
 };

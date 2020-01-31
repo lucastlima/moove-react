@@ -1,9 +1,11 @@
-import React from "react";
-import styled from "styled-components";
-import Poster from "./Poster";
-import moment from "moment";
-import SvgRating from "./SvgRating";
-import { StyledNavLink } from "./styledComponents";
+import React from 'react';
+import styled from 'styled-components';
+import Poster from './Poster';
+import moment from 'moment';
+import SvgRating from './SvgRating';
+import { StyledNavLink } from './styledComponents';
+import { useDispatch } from 'react-redux';
+import { fetchSelected, setSelected } from '../store/actions';
 
 const MediaItemStyled = styled.div`
   display: flex;
@@ -51,13 +53,19 @@ const MediaItemStyled = styled.div`
 `;
 
 function MediaItem({ media, mediaType }) {
+  const dispatch = useDispatch();
+
+  const handleItemSelect = () => {
+    const data = mediaType ? { ...media, media_type: mediaType } : media;
+    dispatch(setSelected(data));
+    dispatch(fetchSelected(data));
+  };
+
   return (
     <StyledNavLink
+      onClick={handleItemSelect}
       key={media.id}
-      to={{
-        pathname: `/${mediaType ? mediaType : media.media_type}/${media.id}`,
-        data: mediaType ? { ...media, media_type: mediaType } : media
-      }}
+      to={`/${mediaType ? mediaType : media.media_type}/${media.id}`}
     >
       <MediaItemStyled>
         <Poster src={media.poster_path} size="w500" alt={media.title} />

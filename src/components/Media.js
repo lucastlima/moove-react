@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { useLocation } from "react-router-dom";
-import { setSelected, fetchSelected } from "../store/actions";
-import { useDispatch, useSelector } from "react-redux";
-import SvgArrow from "./SvgArrow";
-import Poster from "./Poster";
-import history from "../utils/history";
-import Loader from "./Loader";
-import { StyledNavLink } from "./styledComponents";
-import YoutubeFrame from "./YoutubeFrame";
-import Modal from "./Modal";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { fetchSelected, setSelected } from '../store/actions';
+import SvgArrow from './SvgArrow';
+import Poster from './Poster';
+import Loader from './Loader';
+import { StyledNavLink } from './styledComponents';
+import YoutubeFrame from './YoutubeFrame';
+import Modal from './Modal';
 
 const MediaStyled = styled.div`
   display: flex;
@@ -143,6 +142,7 @@ const Info = styled.div`
     .image-wrapper,
     .media-info {
       grid-column: span 2;
+      overflow-y: visible;
     }
 
     .title {
@@ -199,31 +199,16 @@ const VideoWrapper = styled.div`
   }
 `;
 
-function Media() {
+function Media({ history }) {
+  const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [videoSelected, setVideoSelected] = useState(null);
   const selected = useSelector(s => s.selection.selected);
   const loading = useSelector(s => s.selection.loading);
-  const dispatch = useDispatch();
-  const location = useLocation();
-  const { data } = location;
-
-  const year = selected.release_date || selected.first_air_date;
-  const recommended = selected.recommendations.results.length;
-
-  console.log(selected);
-
-  useEffect(() => {
-    if (data) {
-      dispatch(setSelected(data));
-      dispatch(fetchSelected(data));
-    }
-  }, [data, dispatch, location]);
-
-  const url = "https://image.tmdb.org/t/p/original";
+  const prevPath = useSelector(s => s.local.prevPath);
 
   const handleGoBack = () => {
-    history.goBack();
+    history.push(prevPath);
   };
 
   const handleVideoSelect = ({ target }) => {
@@ -232,13 +217,23 @@ function Media() {
     setIsModalOpen(true);
   };
 
+  const handleRecomendationSelect = r => {
+    const data = { ...r, media_type: selected.media_type };
+    dispatch(setSelected(data));
+    dispatch(fetchSelected(data));
+  };
+
   const handleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
 
-  return loading ? (
-    <Loader />
-  ) : (
+  if (loading) return <Loader />;
+
+  const year = selected.release_date || selected.first_air_date;
+  const recommended = selected.recommendations.results.length;
+  const url = 'https://image.tmdb.org/t/p/original';
+
+  return (
     <MediaStyled bg={url + selected.backdrop_path}>
       <div onClick={handleGoBack} className="arrow-wrapper">
         <SvgArrow size={2} opacity={0.8} direction="left" />
@@ -253,7 +248,7 @@ function Media() {
             <h2>{selected.title || selected.name}</h2>
           </div>
           <div className="year">
-            <h3>{year.split("-")[0]}</h3>
+            <h3>{year.split('-')[0]}</h3>
           </div>
           <div className="media-info">
             <div className="genres">
@@ -302,10 +297,8 @@ function Media() {
               {selected.recommendations.results.map(r => (
                 <div key={r.id} className="r-poster">
                   <StyledNavLink
-                    to={{
-                      pathname: `/${selected.media_type}/${r.id}`,
-                      data: { ...r, media_type: selected.media_type }
-                    }}
+                    onClick={() => handleRecomendationSelect(r)}
+                    to={`/${selected.media_type}/${r.id}`}
                   >
                     <Poster src={r.poster_path} size="w342" alt={r.title} />
                   </StyledNavLink>
