@@ -5,7 +5,6 @@ import Layout from "./components/Layout";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Movies from "./containers/Movies";
 import Media from "./components/Media";
-import Discover from "./containers/Discover";
 import Trending from "./containers/Trending";
 import TvShows from "./containers/TvShows";
 
@@ -27,8 +26,7 @@ const App = () => {
         <Route exact path="/tv/:id" component={Media} />
         <Route exact path="/trending/:id" component={Media} />
         <Route exact path="/trending" component={Trending} />
-        <Route exact path="/discover" component={Discover} />
-        <Redirect to="/discover" />
+        <Redirect to="/trending" />
       </Switch>
     </Layout>
   );

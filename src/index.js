@@ -6,17 +6,17 @@ import store from "./store";
 import App from "./App";
 import theme from "./utils/theme";
 import GlobalStyle from "./utils/global";
-import { Router } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
 import history from "./utils/history";
 
 ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <Router history={history}>
+      <HashRouter basename="/" history={history}>
         <GlobalStyle />
         <App />
-      </Router>
+      </HashRouter>
     </ThemeProvider>
   </Provider>,
   document.getElementById("root")

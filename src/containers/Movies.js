@@ -40,7 +40,7 @@ function Movies() {
       <div className="navigation">Search</div>
       <div className="view">
         {movies.map(movie => (
-          <MediaItem key={movie.id} mediaType="movies" media={movie} />
+          <MediaItem key={movie.id} mediaType="movie" media={movie} />
         ))}
       </div>
     </MoviesStyled>

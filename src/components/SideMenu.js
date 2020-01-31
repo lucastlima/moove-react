@@ -34,6 +34,10 @@ const SideMenuStyle = styled.div`
       }
     }
   }
+
+  @media ${props => props.theme.mediaQueries.small} {
+    display: none;
+  }
 `;
 
 const StyledNavLink = styled(NavLink)`
@@ -53,7 +57,6 @@ function SideMenu() {
       </div>
       <nav>
         <ul>
-          <StyledNavLink to="/discover">Discover</StyledNavLink>
           <StyledNavLink to="/trending">Trending</StyledNavLink>
           <StyledNavLink to="/movies">Movies</StyledNavLink>
           <StyledNavLink to="/tvshows">TV Shows</StyledNavLink>
