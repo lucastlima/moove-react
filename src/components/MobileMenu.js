@@ -6,20 +6,23 @@ const MobileMenuStyle = styled.div`
   display: none;
   position: relative;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: #192022;
   padding: 2rem;
   height: 6rem;
   justify-content: space-between;
+  z-index: 10;
 
   .menu-wrapper {
     display: ${p => (p.isOpen ? "flex" : "none")};
     position: absolute;
-    z-index: 5;
+    z-index: -1;
     top: 6rem;
     left: 0;
     width: 100%;
     height: calc(100vh - 6rem);
     background-color: #192022;
+    animation: openMenu 0.2s ease-in;
+
     nav {
       display: flex;
       flex: 1;
@@ -46,6 +49,17 @@ const MobileMenuStyle = styled.div`
         margin-left: 2px;
         color: #0cd0fc;
       }
+    }
+  }
+
+  @keyframes openMenu {
+    from {
+      opacity: 0;
+      transform: translateY(-100vh);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 

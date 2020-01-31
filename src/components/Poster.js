@@ -8,7 +8,7 @@ const ImageStyled = styled.div`
   flex-direction: column;
   min-width: ${p => (p.min ? `${p.min}rem` : null)};
   width: 100%;
-  height: 100%;
+  height: auto;
   overflow: hidden;
 
   & .preload-img {

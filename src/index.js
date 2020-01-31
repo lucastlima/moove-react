@@ -8,12 +8,11 @@ import theme from "./utils/theme";
 import GlobalStyle from "./utils/global";
 import { HashRouter } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
-import history from "./utils/history";
 
 ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <HashRouter basename="/" history={history}>
+      <HashRouter basename="/">
         <GlobalStyle />
         <App />
       </HashRouter>
